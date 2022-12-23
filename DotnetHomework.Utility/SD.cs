@@ -2,7 +2,6 @@
 {
     public static class SD
     {
-        
         public enum FileType
         {
             XML,
