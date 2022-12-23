@@ -1,0 +1,12 @@
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Tests\bin\Debug\net6.0\DotnetHomework.Tests.deps.json
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Tests\bin\Debug\net6.0\DotnetHomework.Tests.dll
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Tests\bin\Debug\net6.0\ref\DotnetHomework.Tests.dll
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Tests\bin\Debug\net6.0\DotnetHomework.Tests.pdb
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Tests\obj\Debug\net6.0\DotnetHomework.Tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Tests\obj\Debug\net6.0\DotnetHomework.Tests.AssemblyInfoInputs.cache
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Tests\obj\Debug\net6.0\DotnetHomework.Tests.AssemblyInfo.cs
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Tests\obj\Debug\net6.0\DotnetHomework.Tests.csproj.CoreCompileInputs.cache
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Tests\obj\Debug\net6.0\DotnetHomework.Tests.dll
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Tests\obj\Debug\net6.0\ref\DotnetHomework.Tests.dll
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Tests\obj\Debug\net6.0\DotnetHomework.Tests.pdb
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Tests\obj\Debug\net6.0\DotnetHomework.Tests.csproj.AssemblyReference.cache

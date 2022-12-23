@@ -1,0 +1,61 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "cd663e1d-f6b6-4159-93d9-6b74772367a9": {
+      "ProjectGuid": "cd663e1d-f6b6-4159-93d9-6b74772367a9",
+      "DisplayName": "DotnetHomework.Api",
+      "ColorIndex": 0
+    },
+    "40a82d53-0898-4b27-986d-195af6f51c0c": {
+      "ProjectGuid": "40a82d53-0898-4b27-986d-195af6f51c0c",
+      "DisplayName": "DotnetHomework.Tests",
+      "ColorIndex": 1
+    },
+    "c1795699-60e8-4c18-a768-9b348dffee7b": {
+      "ProjectGuid": "c1795699-60e8-4c18-a768-9b348dffee7b",
+      "DisplayName": "DotnetHomework.Models",
+      "ColorIndex": 2
+    },
+    "17e1905e-e075-488a-82bc-c74ce716d319": {
+      "ProjectGuid": "17e1905e-e075-488a-82bc-c74ce716d319",
+      "DisplayName": "DotnetHomework.Data",
+      "ColorIndex": 3
+    },
+    "71420672-9d12-4aba-9415-09ed7a2a6c27": {
+      "ProjectGuid": "71420672-9d12-4aba-9415-09ed7a2a6c27",
+      "DisplayName": "DotnetHomework.Utility",
+      "ColorIndex": 4
+    },
+    "c266b59f-d2d4-4acf-891c-e2e36048dc26": {
+      "ProjectGuid": "c266b59f-d2d4-4acf-891c-e2e36048dc26",
+      "DisplayName": "DotnetHomework.Api.Tests",
+      "ColorIndex": 5
+    },
+    "96852a45-716d-480b-95b5-0f933b063988": {
+      "ProjectGuid": "96852a45-716d-480b-95b5-0f933b063988",
+      "DisplayName": "DotnetHomework.Data.Tests",
+      "ColorIndex": 6
+    },
+    "e9feb89d-d44d-4fbd-8fa9-19a5552ddd82": {
+      "ProjectGuid": "e9feb89d-d44d-4fbd-8fa9-19a5552ddd82",
+      "DisplayName": "DotnetHomework.Utilities.Tests",
+      "ColorIndex": 7
+    },
+    "661b3519-2c5c-40a2-9076-dafc8e31e0d7": {
+      "ProjectGuid": "661b3519-2c5c-40a2-9076-dafc8e31e0d7",
+      "DisplayName": "DotnetHomework.Utility.Tests",
+      "ColorIndex": 8
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "53425486-dc7a-4336-848d-449050b8ffb0": {
+      "ProjectGuid": "53425486-dc7a-4336-848d-449050b8ffb0",
+      "DisplayName": "DotnetHomework.Api",
+      "ColorIndex": 9
+    }
+  },
+  "NextColorIndex": 10
+}
