@@ -2,13 +2,14 @@
 {
     public static class SD
     {
-        public static string Folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"UploadFiles");
-        public static string Dictionary = Path.Combine(Folder, "dictionary");
+        public static readonly string Folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"UploadFiles");
+        public static readonly string Dictionary = Path.Combine(Folder, "dictionary");
         
         public enum FileType
         {
             XML,
-            JSON
+            JSON,
+            MessagePack
         }
 
         public enum StorageType

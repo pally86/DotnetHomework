@@ -179,6 +179,7 @@
       "DotnetHomework.Utility/1.0.0": {
         "dependencies": {
           "DotnetHomework.Models": "1.0.0",
+          "MessagePack": "2.4.59",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0",
           "Microsoft.Orleans.Core.Abstractions": "3.6.5",
           "Newtonsoft.Json": "13.0.2"

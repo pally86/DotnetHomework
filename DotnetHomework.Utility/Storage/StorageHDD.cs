@@ -9,18 +9,15 @@ namespace DotnetHomework.Utility
 {
     public class StorageHDD : IStorage
     {
-        
         public async Task<string> GetData(string id)
         {
             string data;
             var path = Path.Combine(SD.Folder, GetFileName(id));
 
-            
             using (StreamReader reader = new StreamReader(path))
                 data = await reader.ReadToEndAsync();
 
             return data;
-
         }
 
         private string GetFileName(string id)

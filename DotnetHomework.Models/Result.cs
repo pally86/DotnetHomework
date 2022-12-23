@@ -13,9 +13,6 @@ namespace DotnetHomework.Models
         public int StatusCode { get; set; }
         public string? ErrorMessage { get; set; }
 
-        public static implicit operator Result(void v)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

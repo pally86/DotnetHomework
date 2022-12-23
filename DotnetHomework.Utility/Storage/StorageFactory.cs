@@ -1,9 +1,5 @@
-﻿
-
-namespace DotnetHomework.Utility
+﻿namespace DotnetHomework.Utility
 {
-    
-
     public class StorageFactory : IStorageFactory
     {
         private readonly IEnumerable<IStorage> _storageServices;
@@ -28,8 +24,5 @@ namespace DotnetHomework.Utility
         {
             return _storageServices.FirstOrDefault(x => x.GetType() == type)!;
         }
-
-        
     }
-
 }

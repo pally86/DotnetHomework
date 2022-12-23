@@ -17,17 +17,14 @@ namespace DotnetHomework.Data
             _storageFactory = storageFactory;
             _converter = converter;
         }
-        public async Task Add(Document document)
-        {
-            await _storageFactory.GetInstance("hdd").SaveData(document);
-        }
+      
 
         public async Task Add(Document document, string storageType)
         {
             await _storageFactory.GetInstance(storageType).SaveData(document);
         }
 
-        
+
         public async Task<Document> GetDocument(string id)
         {
             string data = await _storageFactory.GetInstance("hdd").GetData(id);
