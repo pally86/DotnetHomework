@@ -15,6 +15,7 @@ builder.Services.AddScoped<IDocumentsRepository, DocumentsRepository>();
 builder.Services.AddScoped<IStorageFactory, StorageFactory>();
 builder.Services.AddScoped<IStorage, StorageCloud>();
 builder.Services.AddScoped<IStorage, StorageHDD>();
+builder.Services.AddScoped<IConverter, Converter>();
 
 
 builder.Services

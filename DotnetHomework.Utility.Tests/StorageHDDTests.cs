@@ -16,7 +16,7 @@ namespace DotnetHomework.Utility
         {
             document = new Document()
             {
-                Id = "Id1",
+                Id = "TestId1",
                 Data = new object[] { new { prop1 = "prop1", prop2 = 1 }, new { prop1 = "prop2", prop2 = 2 } },
                 Tags = new List<string>() { "a", "b" }
             };

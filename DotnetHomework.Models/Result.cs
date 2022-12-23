@@ -12,5 +12,10 @@ namespace DotnetHomework.Models
         public string ContentType { get; set; }
         public int StatusCode { get; set; }
         public string? ErrorMessage { get; set; }
+
+        public static implicit operator Result(void v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

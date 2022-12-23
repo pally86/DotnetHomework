@@ -181,6 +181,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "MessagePack": {
+              "target": "Package",
+              "version": "[2.4.59, )"
+            },
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
               "version": "[7.0.0, )"
@@ -188,6 +192,10 @@
             "Microsoft.Orleans.Core.Abstractions": {
               "target": "Package",
               "version": "[3.6.5, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.2, )"
             }
           },
           "imports": [

@@ -10,10 +10,12 @@ namespace DotnetHomework.Data
     public class DocumentsRepository : IDocumentsRepository
     {
         private readonly IStorageFactory _storageFactory;
+        private readonly IConverter _converter;
         
-        public DocumentsRepository(IStorageFactory storageFactory)
+        public DocumentsRepository(IStorageFactory storageFactory, IConverter converter)
         {
             _storageFactory = storageFactory;
+            _converter = converter;
         }
         public async Task Add(Document document)
         {
@@ -23,14 +25,6 @@ namespace DotnetHomework.Data
         public async Task Add(Document document, string storageType)
         {
             await _storageFactory.GetInstance(storageType).SaveData(document);
-            
-            
-            //switch(storageType)
-            //{
-            //    case "cloud": await SaveToCloud(document); break;
-            //    case "hdd": await SaveToHDD(document); break;
-            //    case "inmemory": await SaveToInMemory(document); break;
-            //}
         }
 
         
@@ -53,19 +47,7 @@ namespace DotnetHomework.Data
             try
             {
                 data = await _storageFactory.GetInstance(storageType).GetData(id);
-                
-
-                switch (fileType)
-                {
-                    case "json":
-                        result.Data = data;
-                        result.ContentType = "application/json";
-                        break;
-                    case "xml":
-                        result.Data = GetDocumentXML(data);
-                        result.ContentType = "application/xml";
-                        break;
-                }
+                result = await _converter.Convert(data, fileType);
                 result.StatusCode = StatusCodes.Status201Created;
             }
             catch(Exception e)
@@ -90,11 +72,7 @@ namespace DotnetHomework.Data
         //    return result;
         //}
 
-        private string GetDocumentXML(string data)
-        {
-            XNode node = JsonConvert.DeserializeXNode(data, "Root");
-            return node.ToString();
-        }
+        
 
 
         

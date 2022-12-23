@@ -1,0 +1,15 @@
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Utility\bin\Debug\net6.0\DotnetHomework.Utility.deps.json
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Utility\bin\Debug\net6.0\DotnetHomework.Utility.dll
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Utility\bin\Debug\net6.0\ref\DotnetHomework.Utility.dll
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Utility\bin\Debug\net6.0\DotnetHomework.Utility.pdb
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Utility\bin\Debug\net6.0\DotnetHomework.Models.dll
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Utility\bin\Debug\net6.0\DotnetHomework.Models.pdb
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Utility\obj\Debug\net6.0\DotnetHomework.Utility.csproj.AssemblyReference.cache
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Utility\obj\Debug\net6.0\DotnetHomework.Utility.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Utility\obj\Debug\net6.0\DotnetHomework.Utility.AssemblyInfoInputs.cache
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Utility\obj\Debug\net6.0\DotnetHomework.Utility.AssemblyInfo.cs
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Utility\obj\Debug\net6.0\DotnetHomework.Utility.csproj.CoreCompileInputs.cache
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Utility\obj\Debug\net6.0\DotnetHomework.Utility.csproj.CopyComplete
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Utility\obj\Debug\net6.0\DotnetHomework.Utility.dll
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Utility\obj\Debug\net6.0\ref\DotnetHomework.Utility.dll
+C:\Users\Pally\source\repos\DotnetHomework\DotnetHomework.Utility\obj\Debug\net6.0\DotnetHomework.Utility.pdb

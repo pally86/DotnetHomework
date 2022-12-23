@@ -19,6 +19,7 @@ namespace DotnetHomework.Utility
             {
                 "hdd" => this.GetService(typeof(StorageHDD)),
                 "cloud" => this.GetService(typeof(StorageCloud)),
+                "inmemory" => this.GetService(typeof(StorageFactory)),
                 _ => throw new InvalidOperationException()
             }; ;
         }

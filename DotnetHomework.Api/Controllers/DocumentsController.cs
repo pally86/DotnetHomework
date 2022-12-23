@@ -53,25 +53,7 @@ namespace DotnetHomework.Controllers
         }
 
 
-        [HttpGet]
-        [Route("msgPack/{id}")]
-        public async Task<IActionResult> GetMsgPack(string id)
-        {
-            string data;
-            using (StreamReader reader = new StreamReader(id))
-            {
-                data = await reader.ReadToEndAsync();
-            }
-            var bytes = MessagePack.MessagePackSerializer.Serialize(data);
-            var result = MessagePackSerializer.Deserialize<string>(bytes);
-            return new ContentResult
-            {
-                ContentType = "application/x-msgpack",
-                Content = result,
-                StatusCode = 200
-            };
-
-        }
+       
 
         // POST <DocumentsController>
         [HttpPost]
