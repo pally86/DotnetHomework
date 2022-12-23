@@ -2,8 +2,6 @@
 {
     public static class SD
     {
-        public static readonly string Folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"UploadFiles");
-        public static readonly string Dictionary = Path.Combine(Folder, "dictionary");
         
         public enum FileType
         {

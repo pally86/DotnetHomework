@@ -32,7 +32,7 @@ namespace DotnetHomework.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Get(string id)
         {
-            Result data = await _repo.GetDocument(id);
+            Document data = await _repo.GetDocument(id);
             if (data == null)
                 return BadRequest("Error");
             return Ok(data);
