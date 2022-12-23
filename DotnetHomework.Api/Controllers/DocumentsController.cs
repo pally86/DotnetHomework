@@ -44,6 +44,8 @@ namespace DotnetHomework.Controllers
         {
             Result result = await _repo.GetDocument(id, storageType, fileType);
 
+            
+
             return new ContentResult
             {
                 ContentType = result.ContentType,

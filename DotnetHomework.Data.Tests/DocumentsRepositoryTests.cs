@@ -34,7 +34,8 @@ namespace DotnetHomework.Data
         [Test]
         public void SaveDocument_Document_CheckIfFileExist()
         {
-            var repository = new DocumentsRepository(_storage.Object);
+            Assert.Equals(1,2);
+            //var repository = new DocumentsRepository(_storage.Object);
         }
     }
 }

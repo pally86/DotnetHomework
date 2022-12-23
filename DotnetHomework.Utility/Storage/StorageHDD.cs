@@ -12,6 +12,10 @@ namespace DotnetHomework.Utility
         private static readonly string Folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "UploadFiles");
         private static readonly string Dictionary = Path.Combine(Folder, "dictionary");
 
+        public StorageHDD()
+        {
+            InitialPath();
+        }
         public async Task<string> GetData(string id)
         {
             string data;
@@ -33,10 +37,9 @@ namespace DotnetHomework.Utility
             return ids[id];
         }
         public async Task SaveData(Document document)
-        {
-            InitialPath();
+        {            
             if (!IsUniqueId(document.Id))
-                return;
+                throw new Exception("Id is");
             
             Guid fileName = Guid.NewGuid();
             using (StreamWriter sw = File.AppendText(Dictionary))
@@ -51,8 +54,7 @@ namespace DotnetHomework.Utility
         }
 
         private void InitialPath()
-        {
-            
+        {            
             if (!Directory.Exists(Folder))
             {
                 Directory.CreateDirectory(Folder);
