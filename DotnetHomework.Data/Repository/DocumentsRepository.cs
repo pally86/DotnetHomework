@@ -21,19 +21,31 @@ namespace DotnetHomework.Data
 
         public async Task Add(Document document, string storageType)
         {
-            await _storageFactory.GetInstance(storageType).SaveData(document);
+            try
+            {
+                await _storageFactory.GetInstance(storageType).SaveData(document);
+            }
+            catch(Exception e)
+            {
+
+            }
         }
 
 
         public async Task<Document> GetDocument(string id)
         {
+            
             string data = await _storageFactory.GetInstance("hdd").GetData(id);
+            if(data == null)
+                throw new Exception("Document with that ID not found");
 
             byte[] byteArray = Encoding.ASCII.GetBytes(data);
             using
                 MemoryStream stream = new MemoryStream(byteArray);
             Document? document = await System.Text.Json.JsonSerializer.DeserializeAsync<Document>(stream);
             return document;
+                
+            
         }
 
         public async Task<Result> GetDocument(string id, string storageType, string fileType)

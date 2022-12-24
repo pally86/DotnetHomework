@@ -18,13 +18,16 @@ namespace DotnetHomework.Data
         private Mock<IConverter> _converter;
         private DocumentsRepository _repository;
 
-        public DocumentsRepositoryTests()
-        {
-
-        }
+        private string path;
+        private string dictionary;
+        
+            
         [SetUp]
         public void Setup()
         {
+            path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "UploadFiles");
+            dictionary = Path.Combine(path, "dictionary");
+
             document = new Document()
             {
                 Id = "Id1",
@@ -38,8 +41,43 @@ namespace DotnetHomework.Data
         }
 
         [Test]
-        public void SaveDocument_Document_CheckIfFileExist()
-        { 
+        public async Task GetDocument_Document_VerifyIfInvokedConvert()
+        {
+            _storageFactory.Setup(x => x.GetInstance("hdd"))
+                .Returns(new StorageHDD());
+            await _repository.Add(document, "hdd");
+            var ex = await _repository.GetDocument("Id1");
+            _storageFactory.Verify(x => x.GetInstance("hdd"), Times.Exactly(2));
+            DeleteFilesAfterTest();
+        }
+
+        [Test]
+        public async Task GetDocument_Document_ThrowExceptionIfDocumentNotFound()
+        {
+            _storageFactory.Setup(x => x.GetInstance("hdd"))
+                .Returns(new StorageHDD());
+            await _repository.Add(document, "hdd");
+            var exception = Assert.ThrowsAsync<Exception>(
+                 async () => await _repository.GetDocument(""));
+            DeleteFilesAfterTest();
+            Assert.AreEqual("Document with that ID not found", exception.Message);
+            
+
+        }
+
+        [Test]
+        public async Task SaveDocument_Document_VerifyIfInvokedStorage()
+        {
+            await _repository.Add(document, "x");
+            _storageFactory.Verify(x => x.GetInstance("x"), Times.Once);
+        }
+
+        private void DeleteFilesAfterTest()
+        {
+            var linesAfterAdd = File.ReadAllLines(dictionary);
+            var fileName = linesAfterAdd[linesAfterAdd.Length - 1].Split(':')[1];
+            File.Delete(Path.Combine(path, fileName));
+            File.WriteAllLines(dictionary, linesAfterAdd.Take(linesAfterAdd.Length - 1).ToArray());
         }
     }
 }

@@ -16,24 +16,34 @@ namespace DotnetHomework.Utility
         {
             InitialPath();
         }
-        public async Task<string> GetData(string id)
+        public async Task<string?> GetData(string id)
         {
             string data;
-            var path = Path.Combine(Folder, GetFileName(id));
+            string fileName = GetFileName(id);
 
+            if (fileName == null)
+                return null;
+
+            string path = Path.Combine(Folder, fileName);
+
+            
             using (StreamReader reader = new StreamReader(path))
                 data = await reader.ReadToEndAsync();
 
             return data;
         }
 
-        private string GetFileName(string id)
+        private string? GetFileName(string id)
         {
             Dictionary<string, string> ids = new Dictionary<string, string>();
             foreach (string line in File.ReadLines(Dictionary))
             {
                 ids.Add(line.Split(':')[0], line.Split(':')[1]);
             }
+            
+            if (ids.Count == 0 || !ids.ContainsKey(id))
+                return null;
+            
             return ids[id];
         }
         public async Task SaveData(Document document)
