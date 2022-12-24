@@ -14,28 +14,32 @@ namespace DotnetHomework.Data
     public class DocumentsRepositoryTests
     {
         private Document document;
-        private Mock<IStorage> _storage;
+        private Mock<IStorageFactory> _storageFactory;
+        private Mock<IConverter> _converter;
+        private DocumentsRepository _repository;
 
         public DocumentsRepositoryTests()
         {
-            document = new Document()
-            {
-                Id = "Id1",
-                Data = new object[] { new {prop1 = "prop1", prop2 = 1 }, new { prop1 = "prop2", prop2 = 2 } },
-                Tags = new List<string>() { "a", "b" }
-            };
+
         }
         [SetUp]
         public void Setup()
         {
-            _storage = new Mock<IStorage>();
+            document = new Document()
+            {
+                Id = "Id1",
+                Data = new object[] { new { prop1 = "prop1", prop2 = 1 }, new { prop1 = "prop2", prop2 = 2 } },
+                Tags = new List<string>() { "a", "b" }
+            };
+            _converter = new Mock<IConverter>();
+            _storageFactory = new Mock<IStorageFactory>();
+            _repository = new DocumentsRepository(_storageFactory.Object, _converter.Object);
+
         }
 
         [Test]
         public void SaveDocument_Document_CheckIfFileExist()
-        {
-            Assert.Equals(1,2);
-            //var repository = new DocumentsRepository(_storage.Object);
+        { 
         }
     }
 }

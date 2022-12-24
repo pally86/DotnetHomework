@@ -56,23 +56,5 @@ namespace DotnetHomework.Data
             }
             return result;         
         }
-
-        
-
-        //Nazov suboru v dictionary...  GUID
-        
-        //private async Task<Document> GetDocumentJSON(string data)
-        //{
-        //    byte[] byteArray = Encoding.ASCII.GetBytes(data);
-        //    MemoryStream stream = new MemoryStream(byteArray);
-        //    Document? result = await System.Text.Json.JsonSerializer.DeserializeAsync<Document>(stream);
-        //    return result;
-        //}
-
-        
-
-
-        
-
     }
 }

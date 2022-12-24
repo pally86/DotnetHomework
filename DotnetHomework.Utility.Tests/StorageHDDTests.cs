@@ -16,50 +16,31 @@ namespace DotnetHomework.Utility
         private Document document2;
         private string path;
         private string dictionary;
-        private IStorage storage;
-
-        public StorageHDDTests()
-        {
-            path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "UploadFiles");
-            dictionary = Path.Combine(path, "dictionary");
-            storage = new StorageHDD();
-
-            document1 = new Document()
-            {
-                Id = "TestId1",
-                Data = new object[] { new { prop1 = "prop1", prop2 = 1 }, new { prop1 = "prop2", prop2 = 2 } },
-                Tags = new List<string>() { "a", "b" }
-            };
-            document2 = new Document()
-            {
-                Id = "TestId1",
-                Data = new object[] { new { prop1 = "prop1", prop2 = 1 }, new { prop1 = "prop2", prop2 = 2 } },
-                Tags = new List<string>() { "a", "b" }
-            };
-        }
+        private IStorage _storage;
+        
         [SetUp]
         public void Setup()
         {
             path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "UploadFiles");
             dictionary = Path.Combine(path, "dictionary");
-            storage = new StorageHDD();
+            _storage = new StorageHDD();
 
             document1 = new Document()
             {
                 Id = "TestId1",
-                Data = new object[] { new { prop1 = "prop1", prop2 = 1 }, new { prop1 = "prop2", prop2 = 2 } },
+                Data = new object[] { new { prop1 = "prop1", prop2 = 1 }, new { prop3 = "prop3", prop4 = 4 } },
                 Tags = new List<string>() { "a", "b" }
             };
             document2 = new Document()
             {
                 Id = "TestId1",
-                Data = new object[] { new { prop1 = "prop1", prop2 = 1 }, new { prop1 = "prop2", prop2 = 2 } },
-                Tags = new List<string>() { "a", "b" }
+                Data = new object[] { new { prop1 = "prop5", prop2 = 6 }, new { prop1 = "prop7", prop2 = 8 } },
+                Tags = new List<string>() { "c", "d" }
             };
         }
 
         [Test]
-        public async Task SaveData_Document_CheckIfCreateFile()
+        public async Task SaveData_Document_CheckIfCreateFileAndWriteToDictionary()
         {
             int countFiles = Directory.GetFiles(path).Count();
             string[] lines;
@@ -70,26 +51,23 @@ namespace DotnetHomework.Utility
                 linesLength = lines.Length;
             } 
 
-            await storage.SaveData(document1);
+            await _storage.SaveData(document1);
             
             int countFilesAfterAdd = Directory.GetFiles(path).Count();            
             var linesAfterAdd = File.ReadAllLines(dictionary);
-
-            DeleteFilesAfterTest();
-
+            
             Assert.That((countFiles + 1).Equals(countFilesAfterAdd));
             Assert.That((linesLength + 1).Equals(linesAfterAdd.Length));
 
-            
+            DeleteFilesAfterTest();
         }
 
         [Test]
         public async Task GetData_Document_CheckIfGetFile()
         {
-            await storage.SaveData(document1);
-            
+            await _storage.SaveData(document1);
 
-            var file = await storage.GetData("TestId1");
+            var file = await _storage.GetData("TestId1");
             var jsonString = JsonSerializer.Serialize(document1);
 
             Assert.AreEqual(file, jsonString);
@@ -99,15 +77,16 @@ namespace DotnetHomework.Utility
         [Test]
         public async Task SaveData_Document_AddSameIdCheckThrownException()
         {
-            await storage.SaveData(document1);
-            await storage.SaveData(document2);
+            await _storage.SaveData(document1);
 
-            var file = await storage.GetData("TestId1");
-            var jsonString = JsonSerializer.Serialize(document1);
-
-            Assert.AreEqual(file, jsonString);
+            var exception = Assert.ThrowsAsync<Exception>(
+                async () => await _storage.SaveData(document2));
+           
+            Assert.AreEqual("You must use other ID", exception.Message);
+            
             DeleteFilesAfterTest();
         }
+        
 
         private void DeleteFilesAfterTest()
         {

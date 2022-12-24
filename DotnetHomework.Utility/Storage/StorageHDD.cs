@@ -37,9 +37,9 @@ namespace DotnetHomework.Utility
             return ids[id];
         }
         public async Task SaveData(Document document)
-        {            
+        {
             if (!IsUniqueId(document.Id))
-                throw new Exception("Id is");
+                throw new Exception("You must use other ID");
             
             Guid fileName = Guid.NewGuid();
             using (StreamWriter sw = File.AppendText(Dictionary))
