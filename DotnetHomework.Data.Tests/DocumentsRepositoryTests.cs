@@ -46,8 +46,8 @@ namespace DotnetHomework.Data
             _storageFactory.Setup(x => x.GetInstance("hdd"))
                 .Returns(new StorageHDD());
             await _repository.Add(document, "hdd");
-            var ex = await _repository.GetDocument("Id1");
-            _storageFactory.Verify(x => x.GetInstance("hdd"), Times.Exactly(2));
+            //var ex = await _repository.GetDocument("Id1");
+            _storageFactory.Verify(x => x.GetInstance("hdd"), Times.Once);
             DeleteFilesAfterTest();
         }
 
