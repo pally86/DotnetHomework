@@ -40,11 +40,10 @@ namespace DotnetHomework.Controllers
 
         [HttpGet]
         [Route("{id}/{fileType}/{storageType}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Get(string id, string fileType, string storageType)
         {
             Result result = await _repo.GetDocument(id, storageType, fileType);
-
-            
 
             return new ContentResult
             {
@@ -59,13 +58,15 @@ namespace DotnetHomework.Controllers
 
         // POST <DocumentsController>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> Post([FromBody] Document document, string type)
         {
             try
             {
-                await _repo.Add(document, type); 
+                await _repo.Add(document, type);
 
-                return Ok("Document successsfuly uploaded.");
+                
+                return CreatedAtAction(nameof(Get),  document.Id );
             }
             catch (Exception ex)
             {
@@ -82,13 +83,12 @@ namespace DotnetHomework.Controllers
             {
                 await _repo.Add(document);
 
-                return Ok();
-                //return CreatedAtRoute(("Document successsfuly uploaded.");
+                return CreatedAtAction(nameof(Get), document, document);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
-            }
+            }            
 
         }
 

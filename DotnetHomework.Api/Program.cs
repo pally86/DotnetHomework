@@ -19,8 +19,11 @@ builder.Services.AddScoped<IConverter, Converter>();
 
 
 builder.Services
-  .AddMvc()
-  .AddXmlSerializerFormatters();
+  .AddMvc(options => 
+  {
+      options.SuppressAsyncSuffixInActionNames = false;  
+  }).AddXmlSerializerFormatters(); ;
+
 
 
 var app = builder.Build();
