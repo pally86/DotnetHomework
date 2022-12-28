@@ -26,7 +26,6 @@ namespace DotnetHomework.Controllers
             _repo = repo;
         }
         
-
         // GET <DocumentsController>/5
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -53,9 +52,6 @@ namespace DotnetHomework.Controllers
             };
         }
 
-
-       
-
         // POST <DocumentsController>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -63,10 +59,8 @@ namespace DotnetHomework.Controllers
         {
             try
             {
-                await _repo.Add(document, type);
-
-                
-                return CreatedAtAction(nameof(Get),  document.Id );
+                await _repo.Add(document, type);                
+                return CreatedAtAction(nameof(Get), new { document.Id } ,document );
             }
             catch (Exception ex)
             {
@@ -82,16 +76,12 @@ namespace DotnetHomework.Controllers
             try
             {
                 await _repo.Add(document);
-
-                return CreatedAtAction(nameof(Get), document, document);
+                return CreatedAtAction(nameof(Get), new { document.Id }, document);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }            
-
         }
-
-        
     }
 }
