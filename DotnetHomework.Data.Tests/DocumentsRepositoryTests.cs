@@ -20,14 +20,14 @@ namespace DotnetHomework.Data
 
         private string path;
         private string dictionary;
-        
-            
+                    
         [SetUp]
         public void Setup()
         {
-            path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "UploadFiles");
+            //path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "UploadFiles");
+            path = "UploadFiles";
             dictionary = Path.Combine(path, "dictionary");
-
+            
             document = new Document()
             {
                 Id = "Id1",
@@ -37,32 +37,28 @@ namespace DotnetHomework.Data
             _converter = new Mock<IConverter>();
             _storageFactory = new Mock<IStorageFactory>();
             _repository = new DocumentsRepository(_storageFactory.Object, _converter.Object);
+            _storageFactory.Setup(x => x.GetInstance("hdd"))
+                .Returns(new StorageHDD());
 
+            while (SD.IsFileLocked(new FileInfo(dictionary), path, dictionary)) { }
         }
 
         [Test]
         public async Task GetDocument_Document_VerifyIfInvokedConvert()
-        {
-            _storageFactory.Setup(x => x.GetInstance("hdd"))
-                .Returns(new StorageHDD());
+        {            
             await _repository.Add(document, "hdd");
-            //var ex = await _repository.GetDocument("Id1");
             _storageFactory.Verify(x => x.GetInstance("hdd"), Times.Once);
-            DeleteFilesAfterTest();
+            SD.DeleteFilesAfterTest(path);
         }
 
         [Test]
         public async Task GetDocument_Document_ThrowExceptionIfDocumentNotFound()
         {
-            _storageFactory.Setup(x => x.GetInstance("hdd"))
-                .Returns(new StorageHDD());
             await _repository.Add(document, "hdd");
             var exception = Assert.ThrowsAsync<Exception>(
                  async () => await _repository.GetDocument(""));
-            DeleteFilesAfterTest();
             Assert.AreEqual("Document with that ID not found", exception.Message);
-            
-
+            SD.DeleteFilesAfterTest(path);
         }
 
         [Test]
@@ -70,14 +66,9 @@ namespace DotnetHomework.Data
         {
             await _repository.Add(document, "x");
             _storageFactory.Verify(x => x.GetInstance("x"), Times.Once);
+            SD.DeleteFilesAfterTest(path);
         }
 
-        private void DeleteFilesAfterTest()
-        {
-            var linesAfterAdd = File.ReadAllLines(dictionary);
-            var fileName = linesAfterAdd[linesAfterAdd.Length - 1].Split(':')[1];
-            File.Delete(Path.Combine(path, fileName));
-            File.WriteAllLines(dictionary, linesAfterAdd.Take(linesAfterAdd.Length - 1).ToArray());
-        }
+        
     }
 }

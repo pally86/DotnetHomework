@@ -21,9 +21,11 @@ namespace DotnetHomework.Utility
         [SetUp]
         public void Setup()
         {
-            path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "UploadFiles");
+            //path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "UploadFiles");
+            path = "UploadFiles";
             dictionary = Path.Combine(path, "dictionary");
             _storage = new StorageHDD();
+            while (SD.IsFileLocked(new FileInfo(dictionary), path, dictionary)) { }
 
             document1 = new Document()
             {
@@ -39,8 +41,9 @@ namespace DotnetHomework.Utility
             };
         }
 
+       
         [Test]
-        public async Task SaveData_Document_CheckIfCreateFileAndWriteToDictionary()
+        public async Task SaveData_SaveDocument_CheckIfCreateFileAndWriteToDictionary()
         {
             int countFiles = Directory.GetFiles(path).Count();
             string[] lines;
@@ -49,21 +52,21 @@ namespace DotnetHomework.Utility
             {
                 lines = File.ReadAllLines(dictionary);
                 linesLength = lines.Length;
-            } 
+            }
 
             await _storage.SaveData(document1);
-            
-            int countFilesAfterAdd = Directory.GetFiles(path).Count();            
+
+            int countFilesAfterAdd = Directory.GetFiles(path).Count();
             var linesAfterAdd = File.ReadAllLines(dictionary);
-            
+
             Assert.That((countFiles + 1).Equals(countFilesAfterAdd));
             Assert.That((linesLength + 1).Equals(linesAfterAdd.Length));
 
-            DeleteFilesAfterTest();
+            SD.DeleteFilesAfterTest(path);
         }
 
         [Test]
-        public async Task GetData_Document_CheckIfGetFile()
+        public async Task GetData_GetFile_CheckIfGetCorrectFile()
         {
             await _storage.SaveData(document1);
 
@@ -71,30 +74,23 @@ namespace DotnetHomework.Utility
             var jsonString = JsonSerializer.Serialize(document1);
 
             Assert.AreEqual(file, jsonString);
-            DeleteFilesAfterTest();
+            SD.DeleteFilesAfterTest(path);
         }
 
         [Test]
-        public async Task SaveData_Document_AddSameIdCheckThrownException()
-        {
+        public async Task SaveData_AddSameId_CheckThrownException()
+        {            
             await _storage.SaveData(document1);
 
             var exception = Assert.ThrowsAsync<Exception>(
                 async () => await _storage.SaveData(document2));
-           
-            Assert.AreEqual("You must use other ID", exception.Message);
-            
-            DeleteFilesAfterTest();
-        }
-        
 
-        private void DeleteFilesAfterTest()
-        {
-            var linesAfterAdd = File.ReadAllLines(dictionary);
-            var fileName = linesAfterAdd[linesAfterAdd.Length - 1].Split(':')[1];
-            File.Delete(Path.Combine(path, fileName));
-            File.WriteAllLines(dictionary, linesAfterAdd.Take(linesAfterAdd.Length - 1).ToArray());
+            Assert.AreEqual("You must use other ID", exception.Message);
+
+            SD.DeleteFilesAfterTest(path);
         }
+
+        
 
 
     }

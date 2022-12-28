@@ -9,7 +9,8 @@ namespace DotnetHomework.Utility
 {
     public class StorageHDD : IStorage
     {
-        private static readonly string Folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "UploadFiles");
+        //private static readonly string Folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "UploadFiles");
+        private static readonly string Folder = "UploadFiles";
         private static readonly string Dictionary = Path.Combine(Folder, "dictionary");
 
         public StorageHDD()
@@ -24,7 +25,7 @@ namespace DotnetHomework.Utility
             if (fileName == null)
                 return null;
 
-            string path = Path.Combine(Folder, fileName);
+            var path = Path.Combine(Folder, fileName);
 
             
             using (StreamReader reader = new StreamReader(path))
@@ -34,7 +35,7 @@ namespace DotnetHomework.Utility
         }
 
         private string? GetFileName(string id)
-        {
+        {            
             Dictionary<string, string> ids = new Dictionary<string, string>();
             foreach (string line in File.ReadLines(Dictionary))
             {
