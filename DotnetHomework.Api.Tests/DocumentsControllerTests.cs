@@ -1,6 +1,7 @@
 ﻿using DotnetHomework.Controllers;
 using DotnetHomework.Data;
 using DotnetHomework.Models;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -19,6 +20,7 @@ namespace DotnetHomework.Api
         private DocumentsController _documentsController;
         private Document document;
         private Document document2;
+        private Document document3;
         [SetUp]
         public void Setup()
         {
@@ -37,6 +39,8 @@ namespace DotnetHomework.Api
                 Data = new object[] { new { prop1 = "prop1", prop2 = 1 }, new { prop1 = "prop2", prop2 = 2 } },
                 Tags = new List<string>() { "a", "b" }
             };
+
+            
         }
 
         [Test]
@@ -47,14 +51,43 @@ namespace DotnetHomework.Api
         }
 
         [Test]
-        public async Task Put_CallRequest_VerifyGetAllInvoked()
+        public async Task Put_CallRequest_VerifyRepoAddInvoked()
         {
             await _documentsController.Put(document);
             _documentRepository.Verify(x => x.Add(document, "hdd"), Times.Once);
         }
 
+        [Test]
+        public async Task Post_CallRequest_VerifyRepoAddInvoked()
+        {
+            await _documentsController.Post(document, "");
+            _documentRepository.Verify(x => x.Add(document, ""), Times.Once);
+        }
 
+        [Test]
+        public async Task Put_AddNullDocument_CheckIfExceptionThrown()
+        {
+            BadRequestObjectResult request = await _documentsController.Put(null) as BadRequestObjectResult;
+            
+            Assert.That(request.Value.Equals("Object reference not set to an instance of an object."));
+            Assert.That(request.StatusCode.Equals(400));
+        }
 
+        [Test]
+        public async Task Post_AddNullDocument_CheckIfExceptionThrown()
+        {
+            BadRequestObjectResult request = await _documentsController.Post(null, "") as BadRequestObjectResult;
 
+            Assert.That(request.Value.Equals("Object reference not set to an instance of an object."));
+            Assert.That(request.StatusCode.Equals(400));
+        }
+
+        [Test]
+        public async Task Get_GetDocument_CheckIfResultIsOK200()
+        {
+            _documentRepository.Setup(x => x.GetDocument(It.IsAny<string>())).ReturnsAsync(new Document());
+            var result = _documentsController.Get("");
+            Assert.That(result.Result.GetType().Equals(typeof(OkObjectResult)));                       
+        }
     }
 }

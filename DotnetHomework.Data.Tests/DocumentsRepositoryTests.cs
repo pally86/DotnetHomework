@@ -31,7 +31,7 @@ namespace DotnetHomework.Data
             document = new Document()
             {
                 Id = "Id1",
-                Data = new object[] { new { prop1 = "prop1", prop2 = 1 }, new { prop1 = "prop2", prop2 = 2 } },
+                Data = new object[] { new { prop1 = "prop1", prop2 = 1 }, new { prop3 = "prop3", prop4 = 4 } },
                 Tags = new List<string>() { "a", "b" }
             };
             _converter = new Mock<IConverter>();
@@ -40,35 +40,33 @@ namespace DotnetHomework.Data
             _storageFactory.Setup(x => x.GetInstance("hdd"))
                 .Returns(new StorageHDD());
 
-            while (SD.IsFileLocked(new FileInfo(dictionary), path, dictionary)) { }
+            while (TestHelper.IsFileLocked(new FileInfo(dictionary), path, dictionary)) { }
         }
 
         [Test]
-        public async Task GetDocument_Document_VerifyIfInvokedConvert()
+        public async Task GetDocument_InvokeMethod_VerifyIfInvokedConvert()
         {            
             await _repository.Add(document, "hdd");
             _storageFactory.Verify(x => x.GetInstance("hdd"), Times.Once);
-            SD.DeleteFilesAfterTest(path);
+            TestHelper.DeleteFilesAfterTest(path);
         }
 
         [Test]
-        public async Task GetDocument_Document_ThrowExceptionIfDocumentNotFound()
+        public async Task GetDocument_EmptyIdRequest_ThrowExceptionIfDocumentNotFound()
         {
             await _repository.Add(document, "hdd");
             var exception = Assert.ThrowsAsync<Exception>(
                  async () => await _repository.GetDocument(""));
             Assert.AreEqual("Document with that ID not found", exception.Message);
-            SD.DeleteFilesAfterTest(path);
+            TestHelper.DeleteFilesAfterTest(path);
         }
 
         [Test]
-        public async Task SaveDocument_Document_VerifyIfInvokedStorage()
+        public async Task SaveDocument_InvokeMethod_VerifyIfInvokedStorage()
         {
             await _repository.Add(document, "x");
             _storageFactory.Verify(x => x.GetInstance("x"), Times.Once);
-            SD.DeleteFilesAfterTest(path);
+            TestHelper.DeleteFilesAfterTest(path);
         }
-
-        
     }
 }

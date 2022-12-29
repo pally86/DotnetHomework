@@ -25,7 +25,7 @@ namespace DotnetHomework.Utility
             path = "UploadFiles";
             dictionary = Path.Combine(path, "dictionary");
             _storage = new StorageHDD();
-            while (SD.IsFileLocked(new FileInfo(dictionary), path, dictionary)) { }
+            while (TestHelper.IsFileLocked(new FileInfo(dictionary), path, dictionary)) { }
 
             document1 = new Document()
             {
@@ -62,7 +62,7 @@ namespace DotnetHomework.Utility
             Assert.That((countFiles + 1).Equals(countFilesAfterAdd));
             Assert.That((linesLength + 1).Equals(linesAfterAdd.Length));
 
-            SD.DeleteFilesAfterTest(path);
+            TestHelper.DeleteFilesAfterTest(path);
         }
 
         [Test]
@@ -74,7 +74,7 @@ namespace DotnetHomework.Utility
             var jsonString = JsonSerializer.Serialize(document1);
 
             Assert.AreEqual(file, jsonString);
-            SD.DeleteFilesAfterTest(path);
+            TestHelper.DeleteFilesAfterTest(path);
         }
 
         [Test]
@@ -87,11 +87,7 @@ namespace DotnetHomework.Utility
 
             Assert.AreEqual("You must use other ID", exception.Message);
 
-            SD.DeleteFilesAfterTest(path);
+            TestHelper.DeleteFilesAfterTest(path);
         }
-
-        
-
-
     }
 }
