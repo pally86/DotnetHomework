@@ -16,8 +16,7 @@ namespace DotnetHomework.Data
         {
             _storageFactory = storageFactory;
             _converter = converter;
-        }
-      
+        }     
 
         public async Task Add(Document document, string storageType)
         {
@@ -31,10 +30,8 @@ namespace DotnetHomework.Data
             }
         }
 
-
         public async Task<Document> GetDocument(string id)
-        {
-            
+        {            
             string data = await _storageFactory.GetInstance("hdd").GetData(id);
             if(data == null)
                 throw new Exception("Document with that ID not found");
@@ -44,8 +41,6 @@ namespace DotnetHomework.Data
                 MemoryStream stream = new MemoryStream(byteArray);
             Document? document = await System.Text.Json.JsonSerializer.DeserializeAsync<Document>(stream);
             return document;
-                
-            
         }
 
         public async Task<Result> GetDocument(string id, string storageType, string fileType)

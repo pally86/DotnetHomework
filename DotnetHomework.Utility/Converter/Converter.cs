@@ -29,7 +29,6 @@ namespace DotnetHomework.Utility
                     convertRes.Data = await GetDocumentMessagePack(data);
                     convertRes.ContentType = "application/x-msgpack";
                     break;
-
             }
             return convertRes;
         }
@@ -43,7 +42,6 @@ namespace DotnetHomework.Utility
             var bytes = MessagePackSerializer.Serialize(data);
             var result = MessagePackSerializer.Deserialize<string>(bytes);
             return result;
-        }
-            
+        }            
     }
 }

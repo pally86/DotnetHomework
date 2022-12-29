@@ -22,10 +22,5 @@
             Created = 201,
             InternalServerError = 500
         }
-
-        
-
     }
-
-
 }

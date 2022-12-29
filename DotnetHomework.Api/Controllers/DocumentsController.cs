@@ -11,22 +11,18 @@ using MessagePack;
 using DotnetHomework.Data;
 using DotnetHomework.Utility;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace DotnetHomework.Controllers
 {
     [Route("[controller]")]
     [ApiController]
     public class DocumentsController : ControllerBase
     {
-
         private readonly IDocumentsRepository _repo;
         public DocumentsController(IDocumentsRepository repo)
         {
             _repo = repo;
         }
         
-        // GET <DocumentsController>/5
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Get(string id)
@@ -52,7 +48,6 @@ namespace DotnetHomework.Controllers
             };
         }
 
-        // POST <DocumentsController>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> Post([FromBody] Document document, string type)
@@ -68,7 +63,6 @@ namespace DotnetHomework.Controllers
             }
         }
 
-        // PUT <DocumentsController>/5
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> Put([FromBody] Document document)

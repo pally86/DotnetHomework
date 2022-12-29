@@ -17,13 +17,11 @@ builder.Services.AddScoped<IStorage, StorageCloud>();
 builder.Services.AddScoped<IStorage, StorageHDD>();
 builder.Services.AddScoped<IConverter, Converter>();
 
-
 builder.Services
   .AddMvc(options => 
   {
       options.SuppressAsyncSuffixInActionNames = false;  
   }).AddXmlSerializerFormatters(); ;
-
 
 
 var app = builder.Build();

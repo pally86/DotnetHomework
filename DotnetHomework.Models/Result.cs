@@ -12,7 +12,5 @@ namespace DotnetHomework.Models
         public string ContentType { get; set; }
         public int StatusCode { get; set; }
         public string? ErrorMessage { get; set; }
-
-       
     }
 }

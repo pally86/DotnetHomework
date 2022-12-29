@@ -35,8 +35,6 @@ namespace DotnetHomework.Utility
             var jsonString = JsonSerializer.Serialize(document1);
             result = await _converter.Convert(jsonString, typeFile);
             return result.ContentType;
-        }
-        
-
+        }       
     }
 }

@@ -26,8 +26,6 @@ namespace DotnetHomework.Utility
             return false;
         }
 
-
-
         public static void DeleteFilesAfterTest(string path)
         {
             foreach (var item in Directory.GetFiles(path))

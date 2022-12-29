@@ -19,8 +19,7 @@ namespace DotnetHomework.Api
         private Mock<IDocumentsRepository> _documentRepository;
         private DocumentsController _documentsController;
         private Document document;
-        private Document document2;
-        private Document document3;
+
         [SetUp]
         public void Setup()
         {
@@ -30,17 +29,9 @@ namespace DotnetHomework.Api
             document = new Document()
             {
                 Id = "TestId1",
-                Data = new object[] { new { prop1 = "prop1", prop2 = 1 }, new { prop1 = "prop2", prop2 = 2 } },
+                Data = new object[] { new { prop1 = "prop1", prop2 = 1 }, new { prop3 = "prop3", prop4 = 4 } },
                 Tags = new List<string>() { "a", "b" }
             };
-            document2 = new Document()
-            {
-                Id = "TestId1",
-                Data = new object[] { new { prop1 = "prop1", prop2 = 1 }, new { prop1 = "prop2", prop2 = 2 } },
-                Tags = new List<string>() { "a", "b" }
-            };
-
-            
         }
 
         [Test]
