@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +11,23 @@ namespace DotnetHomework.Utility
     {
         public static bool IsFileLocked(FileInfo file, string path, string dictionary)
         {
-            while (!Directory.Exists(path)) { }
-            while (!File.Exists(dictionary)) { }
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            while (!Directory.Exists(path)) 
+            {
+                if (sw.ElapsedMilliseconds > 4000)
+                    throw new Exception("Problem with creating directory!");
+            }
+            Console.WriteLine(sw.ElapsedMilliseconds);
+            sw.Stop();
+            sw.Reset();
+            sw.Start();
+            while (!File.Exists(dictionary)) 
+            {
+                if (sw.ElapsedMilliseconds > 4000)
+                    throw new Exception("Problem with creating file!");
+            }
+            sw.Stop();
             try
             {
                 using (FileStream stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None))
