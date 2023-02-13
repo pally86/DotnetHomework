@@ -1,4 +1,4 @@
-﻿using DotnetHomework.Models;
+using DotnetHomework.Models;
 using DotnetHomework.Utility;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
@@ -22,11 +22,11 @@ namespace DotnetHomework.Data
         {
             try
             {
-                await _storageFactory.GetInstance(storageType).SaveData(document);
+                await _storageFactory.GetInstance(storageType).SaveData(document);               
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-
+                throw new Exception(e.Message, e);
             }
         }
 
