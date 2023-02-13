@@ -1,4 +1,4 @@
-﻿using DotnetHomework.Controllers;
+using DotnetHomework.Controllers;
 using DotnetHomework.Data;
 using DotnetHomework.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +18,7 @@ namespace DotnetHomework.Api
     {
         private Mock<IDocumentsRepository> _documentRepository;
         private DocumentsController _documentsController;
-        private Document document;
+        private Document _document;
 
         [SetUp]
         public void Setup()
@@ -26,7 +26,7 @@ namespace DotnetHomework.Api
             _documentRepository = new Mock<IDocumentsRepository>();
             _documentsController = new DocumentsController(_documentRepository.Object);
 
-            document = new Document()
+            _document = new Document()
             {
                 Id = "TestId1",
                 Data = new object[] { new { prop1 = "prop1", prop2 = 1 }, new { prop3 = "prop3", prop4 = 4 } },
@@ -44,15 +44,15 @@ namespace DotnetHomework.Api
         [Test]
         public async Task Put_CallRequest_VerifyRepoAddInvoked()
         {
-            await _documentsController.Put(document);
-            _documentRepository.Verify(x => x.Add(document, "hdd"), Times.Once);
+            await _documentsController.Put(_document);
+            _documentRepository.Verify(x => x.Add(_document, "hdd"), Times.Once);
         }
 
         [Test]
         public async Task Post_CallRequest_VerifyRepoAddInvoked()
         {
-            await _documentsController.Post(document, "");
-            _documentRepository.Verify(x => x.Add(document, ""), Times.Once);
+            await _documentsController.Post(_document, "");
+            _documentRepository.Verify(x => x.Add(_document, ""), Times.Once);
         }
 
         [Test]
